@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vazaphrase Ai Pro by mrouvalm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --primary: #6366f1;
+        --secondary: #a855f7;
+        --accent: #22d3ee;
+        --glass-bg: rgba(15, 23, 42, 0.6);
+        --glass-border: rgba(255, 255, 255, 0.08);
+      }
+
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #020617;
+        overflow-x: hidden;
+        color: #e2e8f0;
+        -webkit-font-smoothing: antialiased;
+      }
+      
+      /* Animated Mesh Background - Optimized with will-change */
+      .mesh-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-color: #020617;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .mesh-blob {
+        position: absolute;
+        width: 60vw;
+        height: 60vw;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.12;
+        will-change: transform;
+        mix-blend-mode: screen;
+      }
+
+      .blob-1 {
+        background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+        top: -10%;
+        left: -10%;
+        animation: blob-move-1 30s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+      }
+
+      .blob-2 {
+        background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+        bottom: -10%;
+        right: -10%;
+        animation: blob-move-2 35s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+      }
+
+      .blob-3 {
+        background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+        top: 40%;
+        left: 30%;
+        animation: blob-move-3 25s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+      }
+
+      @keyframes blob-move-1 {
+        0% { transform: translate3d(0, 0, 0) scale(1); }
+        100% { transform: translate3d(15%, 10%, 0) scale(1.15); }
+      }
+
+      @keyframes blob-move-2 {
+        0% { transform: translate3d(0, 0, 0) scale(1); }
+        100% { transform: translate3d(-10%, -15%, 0) scale(1.1); }
+      }
+
+      @keyframes blob-move-3 {
+        0% { transform: translate3d(0, 0, 0) scale(1); }
+        100% { transform: translate3d(8%, -8%, 0) scale(1.2); }
+      }
+
+      .glass-panel {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      /* Consistent Slide Up */
+      .animate-slide-up {
+        opacity: 0;
+        animation: slide-up 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+
+      @keyframes slide-up {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Placeholder Cycling Animation */
+      @keyframes placeholder-pulse {
+        0% { opacity: 0; transform: translateY(8px); filter: blur(4px); }
+        10% { opacity: 0.6; transform: translateY(0); filter: blur(0); }
+        90% { opacity: 0.6; transform: translateY(0); filter: blur(0); }
+        100% { opacity: 0; transform: translateY(-8px); filter: blur(4px); }
+      }
+
+      .animate-placeholder-pulse {
+        animation: placeholder-pulse 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Orbital Animations */
+      @keyframes orbital-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      .animate-orbital {
+        animation: orbital-spin 4s linear infinite;
+        will-change: transform;
+      }
+
+      .animate-orbital-reverse {
+        animation: orbital-spin 3s linear infinite reverse;
+        will-change: transform;
+      }
+
+      /* Scanning line effect */
+      @keyframes scan-move {
+        0% { top: 0%; opacity: 0; }
+        10% { opacity: 0.4; }
+        90% { opacity: 0.4; }
+        100% { top: 100%; opacity: 0; }
+      }
+
+      .animate-scan {
+        animation: scan-move 3s linear infinite;
+        will-change: top;
+      }
+
+      /* Flicker / Glitch effect for processing text */
+      @keyframes text-glitch {
+        0%, 100% { opacity: 1; transform: none; }
+        92% { opacity: 1; transform: none; }
+        94% { opacity: 0.8; transform: skewX(2deg); }
+        96% { opacity: 1; transform: skewX(-2deg); }
+        98% { opacity: 0.9; transform: none; }
+      }
+
+      .animate-text-flicker {
+        animation: text-glitch 5s infinite;
+      }
+
+      /* Shimmer Loading State */
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+
+      .shimmer-effect::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+        animation: shimmer 2.5s infinite linear;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #020617;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1e293b;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
+      }
+
+      /* Utilities for stagger effects */
+      .delay-75 { animation-delay: 0.075s; }
+      .delay-100 { animation-delay: 0.1s; }
+      .delay-150 { animation-delay: 0.15s; }
+      .delay-200 { animation-delay: 0.2s; }
+      .delay-300 { animation-delay: 0.3s; }
+      .delay-400 { animation-delay: 0.4s; }
+
+      /* Hero Title Gradient Flow */
+      @keyframes gradient-flow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .animate-gradient-flow {
+        background-size: 200% auto;
+        animation: gradient-flow 6s linear infinite;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.35.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div class="mesh-bg" aria-hidden="true">
+      <div class="mesh-blob blob-1"></div>
+      <div class="mesh-blob blob-2"></div>
+      <div class="mesh-blob blob-3"></div>
+    </div>
+    <div id="root"></div>
+  </body>
+</html>
