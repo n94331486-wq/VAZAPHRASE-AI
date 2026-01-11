@@ -78,6 +78,13 @@ const valueProps = [
   { text: "Tanpa Batas Penggunaan", icon: "🚀" }
 ];
 
+const techStack = [
+  { name: "Gemini 3 Pro", icon: "💎" },
+  { name: "Semantic Engine", icon: "🧠" },
+  { name: "SafeShield Privacy", icon: "🛡️" },
+  { name: "Cloud Speed", icon: "☁️" }
+];
+
 const ControlGroup: React.FC<{ label: string; tooltip: string; children: React.ReactNode }> = ({ label, tooltip, children }) => (
   <div className="flex flex-col gap-2 min-w-[150px] relative group/ctrl">
     <div className="flex items-center gap-2">
@@ -230,7 +237,6 @@ const App: React.FC = () => {
             Vazaphrase AI Pro bukan sekadar penukar kata. Kami menggunakan <strong>kecerdasan kognitif</strong> untuk memahami nuansa, emosi, dan tujuan tulisan Anda agar tetap natural namun unik.
           </p>
 
-          {/* Core Value Proposition Cards */}
           <div className="flex flex-wrap justify-center gap-4 mb-14">
             {valueProps.map((prop, idx) => (
               <div key={idx} className="glass-panel px-5 py-3 rounded-2xl flex items-center gap-3 border-white/5 hover:border-indigo-500/30 transition-all duration-300 transform hover:-translate-y-1">
@@ -240,17 +246,27 @@ const App: React.FC = () => {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-5 justify-center">
-             <button onClick={scrollToWorkspace} className="px-12 py-5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-black shadow-[0_20px_50px_rgba(79,70,229,0.3)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] uppercase tracking-widest text-sm">
-                Buka Workspace
+          <div className="flex flex-col sm:flex-row gap-5 justify-center mb-16">
+             <button onClick={scrollToWorkspace} className="px-12 py-5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-black shadow-[0_20px_50px_rgba(79,70,229,0.3)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] uppercase tracking-widest text-sm group">
+                Mulai Menulis Sekarang
+                <svg className="w-5 h-5 ml-3 inline-block transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
              </button>
              <a href="#features" className="px-12 py-5 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-2xl font-black transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] uppercase tracking-widest text-sm backdrop-blur-sm">
                 Pelajari Fitur
              </a>
           </div>
+
+          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 w-full mb-4">Core Technology Stack</span>
+            {techStack.map((tech, i) => (
+              <div key={i} className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-xl border border-white/5">
+                <span className="text-lg">{tech.icon}</span>
+                <span className="text-[11px] font-bold text-slate-300 uppercase tracking-wider">{tech.name}</span>
+              </div>
+            ))}
+          </div>
         </section>
 
-        {/* Benefits Section */}
         <section id="features" className="container mx-auto px-6 py-20 animate-slide-up delay-100">
            <div className="text-center mb-16">
               <h3 className="text-3xl lg:text-4xl font-black mb-4 tracking-tight">Solusi Menulis Tanpa Batas</h3>
@@ -273,16 +289,12 @@ const App: React.FC = () => {
            </div>
         </section>
 
-        {/* Workspace Area */}
         <div id="workspace" ref={workspaceRef} className="container mx-auto px-6 py-24 space-y-16">
-          
-          {/* Section Header */}
           <div className="flex flex-col items-center text-center gap-4 mb-10">
             <h3 className="text-4xl font-black tracking-tighter">AI Workspace</h3>
             <p className="text-slate-400 font-medium text-sm">Siap untuk memparafrase? Masukkan teks Anda di bawah.</p>
           </div>
 
-          {/* Main Controls Card */}
           <div className="glass-panel p-8 lg:p-10 rounded-[3rem] animate-slide-up delay-200 flex flex-wrap gap-10 items-end justify-between">
             <div className="flex flex-wrap gap-8 flex-grow">
               <ControlGroup label="Gaya Bahasa (Tone)" tooltip="Formal untuk kantor/akademik, Santai untuk media sosial atau teman.">
@@ -368,7 +380,6 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          {/* Error Message Section */}
           {error && (
             <div className="relative group animate-slide-up">
               <div className="absolute -inset-1 bg-red-600/20 rounded-[2.5rem] blur opacity-50"></div>
@@ -392,9 +403,7 @@ const App: React.FC = () => {
             </div>
           )}
 
-          {/* Editor Areas */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            {/* Input Side */}
             <div className="space-y-5 animate-slide-up delay-300">
               <div className="flex items-center justify-between px-3">
                 <h3 className="text-xs font-black text-slate-500 uppercase tracking-widest">Teks Sumber</h3>
@@ -426,7 +435,6 @@ const App: React.FC = () => {
               </div>
             </div>
 
-            {/* Output Side */}
             <div className="space-y-5 animate-slide-up delay-400">
               <div className="flex items-center justify-between px-3">
                 <h3 className="text-xs font-black text-slate-500 uppercase tracking-widest">Hasil Cerdas AI</h3>
@@ -444,27 +452,21 @@ const App: React.FC = () => {
                   )}
                 </div>
 
-                {/* Optimized Loading Overlay */}
                 {isLoading && (
                   <div className="absolute inset-0 z-30 flex flex-col items-center justify-center glass-panel rounded-[3rem] bg-slate-950/40 border-indigo-500/20 overflow-hidden shimmer-effect">
                     <div className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent animate-scan z-40"></div>
-                    
                     <div className="relative w-44 h-44 mb-14 flex items-center justify-center">
                        <div className="absolute w-36 h-36 bg-indigo-500/10 rounded-full blur-[60px] animate-pulse"></div>
-                       
                        <div className="absolute inset-0 border-[4px] border-indigo-500/10 rounded-full"></div>
                        <div className="absolute inset-0 border-[4px] border-t-indigo-500 rounded-full animate-orbital shadow-[0_0_25px_rgba(99,102,241,0.5)]"></div>
-                       
                        <div className="absolute w-28 h-28 border-[2px] border-purple-500/10 rounded-full"></div>
                        <div className="absolute w-28 h-28 border-[2px] border-b-purple-500 rounded-full animate-orbital-reverse shadow-[0_0_15px_rgba(168,85,247,0.4)]"></div>
-                       
                        <div className="relative w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl animate-pulse shadow-[0_0_40px_rgba(99,102,241,0.7)] flex items-center justify-center">
                          <svg className="w-9 h-9 text-white animate-text-flicker" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
                          </svg>
                        </div>
                     </div>
-
                     <div className="text-center px-8 relative z-10">
                       <h4 className="text-white font-black text-3xl mb-4 tracking-tighter animate-text-flicker uppercase">
                         AI PROCESSING
@@ -501,7 +503,6 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          {/* Activity History */}
           {history.length > 0 && (
             <div className="space-y-8 pt-12 animate-slide-up">
               <div className="flex items-center gap-6">
@@ -533,7 +534,6 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      {/* Floating Toast Message */}
       <div className={`fixed bottom-12 left-1/2 -translate-x-1/2 z-[100] transition-all duration-700 cubic-bezier(0.19, 1, 0.22, 1) transform ${toast.visible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-16 opacity-0 scale-90 pointer-events-none'}`}>
         <div className="bg-white text-slate-950 px-10 py-5 rounded-[2rem] shadow-2xl flex items-center gap-5 border border-white/20">
           <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20">
@@ -566,7 +566,6 @@ const App: React.FC = () => {
         </div>
       </footer>
 
-      {/* Floating Watermark */}
       <div className="fixed bottom-8 left-8 z-[60] group pointer-events-none md:pointer-events-auto">
         <div className="glass-panel px-6 py-3 rounded-full border-indigo-500/30 shadow-xl flex items-center gap-4 transform group-hover:translate-y-[-8px] transition-all duration-700 border bg-indigo-500/5">
           <div className="relative">
